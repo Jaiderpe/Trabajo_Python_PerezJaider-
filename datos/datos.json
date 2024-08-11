@@ -1,0 +1,42 @@
+{
+    "ventas": [
+        {
+            "fecha": "2024-03-30",
+            "cliente": {
+                "nombre": "fre",
+                "direccion": "eef"
+            },
+            "empleado": {
+                "nombre": "fdfe",
+                "cargo": "ere"
+            },
+            "productos": [
+                {
+                    "nombre": "churrol",
+                    "cantidad": 12,
+                    "precio": 2000.0
+                }
+            ]
+        }
+    ],
+    "compras": [
+        {
+            "fecha": "2024-04-23",
+            "proveedor": {
+                "nombre": "de",
+                "contacto": "2322"
+            },
+            "productos": [
+                {
+                    "nombre": "derf",
+                    "cantidad": 12,
+                    "precio": 3000.0
+                }
+            ]
+        }
+    ],
+    "stock": {
+        "churrol": -12,
+        "derf": 12
+    }
+}

@@ -6,14 +6,17 @@ class Cliente:
     def __init__(self, nombre, direccion):
         self.nombre = nombre
         self.direccion = direccion
+
 class Empleado:
-    def __init__(self, nombre,cargo):
+    def __init__(self, nombre, cargo):
         self.nombre = nombre
-        self.cargo = cargo 
+        self.cargo = cargo
+
 class Proveedor:
     def __init__(self, nombre, contacto):
         self.nombre = nombre
         self.contacto = contacto
+
 class Producto:
     def __init__(self, nombre, cantidad, precio):
         self.nombre = nombre
@@ -31,12 +34,14 @@ class Compra:
     def __init__(self, fecha, proveedor, productos):
         self.fecha = fecha
         self.proveedor = proveedor
-        self.productos = productos    
+        self.productos = productos
+
 class SistemaGestion:
     def __init__(self, archivo_json="datos/datos.json"):
         self.archivo_json = archivo_json
         os.makedirs(os.path.dirname(self.archivo_json), exist_ok=True)
         self.cargar_datos()
+
     def cargar_datos(self):
         try:
             with open(self.archivo_json, 'r') as archivo:
@@ -48,6 +53,7 @@ class SistemaGestion:
             self.ventas = []
             self.compras = []
             self.stock = {}
+
     def guardar_datos(self):
         datos = {
             'ventas': self.ventas,
@@ -56,7 +62,7 @@ class SistemaGestion:
         }
         with open(self.archivo_json, 'w') as archivo:
             json.dump(datos, archivo, indent=4)
-    
+
     def registrar_venta(self, venta):
         venta_dict = {
             'fecha': venta.fecha,
@@ -71,6 +77,7 @@ class SistemaGestion:
             else:
                 self.stock[producto.nombre] = -producto.cantidad
         self.guardar_datos()
+
     def registrar_compra(self, compra):
         compra_dict = {
             'fecha': compra.fecha,
@@ -84,6 +91,7 @@ class SistemaGestion:
             else:
                 self.stock[producto.nombre] = producto.cantidad
         self.guardar_datos()
+
     def generar_informe_ventas(self, inicio, fin):
         print(f"\nInforme de Ventas desde {inicio} hasta {fin}")
         total_ingresos = 0
@@ -102,6 +110,7 @@ class SistemaGestion:
         for nombre, cantidad in self.stock.items():
             print(f"Producto: {nombre}, Cantidad en stock: {cantidad}\n")
 
+
 def ingresar_datos_producto():
     productos = []
     while True:
@@ -114,6 +123,7 @@ def ingresar_datos_producto():
         if otra.lower() != 's':
             break
     return productos
+
 def registrar_venta(sistema):
     fecha = input("Ingrese la fecha de la venta (YYYY-MM-DD): ")
     nombre_cliente = input("Ingrese el nombre del cliente: ")
@@ -141,8 +151,8 @@ def registrar_compra(sistema):
     print("Compra registrada con éxito.\n")
 
 def generar_informe_ventas(sistema):
-    inicio = input("Ingrese la fecha de inicio del informe (AÑO-MM-DD): ")
-    fin = input("Ingrese la fecha de fin del informe (AÑO-MM-DD): ")
+    inicio = input("Ingrese la fecha de inicio del informe (YYYY-MM-DD): ")
+    fin = input("Ingrese la fecha de fin del informe (YYYY-MM-DD): ")
     inicio_dt = datetime.strptime(inicio, '%Y-%m-%d')
     fin_dt = datetime.strptime(fin, '%Y-%m-%d')
     sistema.generar_informe_ventas(inicio_dt, fin_dt)
