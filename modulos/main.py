@@ -2,7 +2,7 @@ import json
 import os
 from datetime import datetime
 
-class cliente:
+class Cliente:
     def __init__(self, nombre, direccion):
         self.nombre = nombre
         self.direccion = direccion
@@ -114,3 +114,17 @@ def ingresar_datos_producto():
         if otra.lower() != 's':
             break
     return productos
+def registrar_venta(sistema):
+    fecha = input("Ingrese la fecha de la venta (YYYY-MM-DD): ")
+    nombre_cliente = input("Ingrese el nombre del cliente: ")
+    direccion_cliente = input("Ingrese la dirección del cliente: ")
+    cliente = Cliente(nombre_cliente, direccion_cliente)
+    
+    nombre_empleado = input("Ingrese el nombre del empleado que realizó la venta: ")
+    cargo_empleado = input("Ingrese el cargo del empleado: ")
+    empleado = Empleado(nombre_empleado, cargo_empleado)
+    
+    productos = ingresar_datos_producto()
+    venta = Venta(fecha, cliente, empleado, productos)
+    sistema.registrar_venta(venta)
+    print("Venta registrada con éxito.\n")
