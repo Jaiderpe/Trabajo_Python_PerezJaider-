@@ -139,3 +139,13 @@ def registrar_compra(sistema):
     compra = Compra(fecha, proveedor, productos)
     sistema.registrar_compra(compra)
     print("Compra registrada con éxito.\n")
+
+def generar_informe_ventas(sistema):
+    inicio = input("Ingrese la fecha de inicio del informe (AÑO-MM-DD): ")
+    fin = input("Ingrese la fecha de fin del informe (AÑO-MM-DD): ")
+    inicio_dt = datetime.strptime(inicio, '%Y-%m-%d')
+    fin_dt = datetime.strptime(fin, '%Y-%m-%d')
+    sistema.generar_informe_ventas(inicio_dt, fin_dt)
+
+def generar_informe_stock(sistema):
+    sistema.generar_informe_stock()
