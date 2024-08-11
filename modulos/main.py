@@ -71,3 +71,17 @@ class SistemaGestion:
             else:
                 self.stock[producto.nombre] = -producto.cantidad
         self.guardar_datos()
+    def registrar_compra(self, compra):
+        compra_dict = {
+            'fecha': compra.fecha,
+            'proveedor': {'nombre': compra.proveedor.nombre, 'contacto': compra.proveedor.contacto},
+            'productos': [{'nombre': p.nombre, 'cantidad': p.cantidad, 'precio': p.precio} for p in compra.productos]
+        }
+        self.compras.append(compra_dict)
+        for producto in compra.productos:
+            if producto.nombre in self.stock:
+                self.stock[producto.nombre] += producto.cantidad
+            else:
+                self.stock[producto.nombre] = producto.cantidad
+        self.guardar_datos()
+
