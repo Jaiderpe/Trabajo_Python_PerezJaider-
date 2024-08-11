@@ -84,4 +84,20 @@ class SistemaGestion:
             else:
                 self.stock[producto.nombre] = producto.cantidad
         self.guardar_datos()
+    def generar_informe_ventas(self, inicio, fin):
+        print(f"\nInforme de Ventas desde {inicio} hasta {fin}")
+        total_ingresos = 0
+        for venta in self.ventas:
+            fecha_venta = datetime.strptime(venta['fecha'], '%Y-%m-%d')
+            if inicio <= fecha_venta <= fin:
+                print(f"Fecha: {venta['fecha']}, Cliente: {venta['cliente']['nombre']}, Dirección: {venta['cliente']['direccion']}")
+                print(f"Empleado: {venta['empleado']['nombre']}, Cargo: {venta['empleado']['cargo']}")
+                for producto in venta['productos']:
+                    print(f"  Producto: {producto['nombre']}, Cantidad: {producto['cantidad']}, Precio: {producto['precio']}")
+                    total_ingresos += producto['cantidad'] * producto['precio']
+        print(f"Total de ingresos: {total_ingresos}\n")
 
+    def generar_informe_stock(self):
+        print("\nInforme de Stock")
+        for nombre, cantidad in self.stock.items():
+            print(f"Producto: {nombre}, Cantidad en stock: {cantidad}\n")
