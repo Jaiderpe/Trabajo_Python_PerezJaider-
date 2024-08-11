@@ -10,7 +10,7 @@ class Empleado:
     def __init__(self, nombre,cargo):
         self.nombre = nombre
         self.cargo = cargo 
-class proveedor:
+class Proveedor:
     def __init__(self, nombre, contacto):
         self.nombre = nombre
         self.contacto = contacto
@@ -128,3 +128,14 @@ def registrar_venta(sistema):
     venta = Venta(fecha, cliente, empleado, productos)
     sistema.registrar_venta(venta)
     print("Venta registrada con éxito.\n")
+
+def registrar_compra(sistema):
+    fecha = input("Ingrese la fecha de la compra (YYYY-MM-DD): ")
+    nombre_proveedor = input("Ingrese el nombre del proveedor: ")
+    contacto_proveedor = input("Ingrese el contacto del proveedor: ")
+    proveedor = Proveedor(nombre_proveedor, contacto_proveedor)
+    
+    productos = ingresar_datos_producto()
+    compra = Compra(fecha, proveedor, productos)
+    sistema.registrar_compra(compra)
+    print("Compra registrada con éxito.\n")
