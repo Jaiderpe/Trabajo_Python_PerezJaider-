@@ -101,3 +101,16 @@ class SistemaGestion:
         print("\nInforme de Stock")
         for nombre, cantidad in self.stock.items():
             print(f"Producto: {nombre}, Cantidad en stock: {cantidad}\n")
+
+def ingresar_datos_producto():
+    productos = []
+    while True:
+        nombre = input("Ingrese el nombre del producto: ")
+        cantidad = int(input("Ingrese la cantidad: "))
+        precio = float(input("Ingrese el precio: "))
+        productos.append(Producto(nombre, cantidad, precio))
+        
+        otra = input("¿Desea ingresar otro producto? (s/n): ")
+        if otra.lower() != 's':
+            break
+    return productos
