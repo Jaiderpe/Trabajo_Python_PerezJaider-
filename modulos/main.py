@@ -32,3 +32,27 @@ class Compra:
         self.fecha = fecha
         self.proveedor = proveedor
         self.productos = productos    
+class SistemaGestion:
+    def __init__(self, archivo_json="datos/datos.json"):
+        self.archivo_json = archivo_json
+        os.makedirs(os.path.dirname(self.archivo_json), exist_ok=True)
+        self.cargar_datos()
+    def cargar_datos(self):
+        try:
+            with open(self.archivo_json, 'r') as archivo:
+                datos = json.load(archivo)
+                self.ventas = datos.get('ventas', [])
+                self.compras = datos.get('compras', [])
+                self.stock = datos.get('stock', {})
+        except FileNotFoundError:
+            self.ventas = []
+            self.compras = []
+            self.stock = {}
+    def guardar_datos(self):
+        datos = {
+            'ventas': self.ventas,
+            'compras': self.compras,
+            'stock': self.stock
+        }
+        with open(self.archivo_json, 'w') as archivo:
+            json.dump(datos, archivo, indent=4)
