@@ -56,3 +56,18 @@ class SistemaGestion:
         }
         with open(self.archivo_json, 'w') as archivo:
             json.dump(datos, archivo, indent=4)
+    
+    def registrar_venta(self, venta):
+        venta_dict = {
+            'fecha': venta.fecha,
+            'cliente': {'nombre': venta.cliente.nombre, 'direccion': venta.cliente.direccion},
+            'empleado': {'nombre': venta.empleado.nombre, 'cargo': venta.empleado.cargo},
+            'productos': [{'nombre': p.nombre, 'cantidad': p.cantidad, 'precio': p.precio} for p in venta.productos]
+        }
+        self.ventas.append(venta_dict)
+        for producto in venta.productos:
+            if producto.nombre in self.stock:
+                self.stock[producto.nombre] -= producto.cantidad
+            else:
+                self.stock[producto.nombre] = -producto.cantidad
+        self.guardar_datos()
